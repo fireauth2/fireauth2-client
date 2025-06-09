@@ -12,6 +12,9 @@
     "lib": ["es2022", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@fireauth2/core": ["packages/core/src/index.ts"]
+    }
   }
 }
