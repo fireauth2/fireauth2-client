@@ -14,6 +14,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@fireauth2/angular": ["packages/angular/src/index.ts"],
       "@fireauth2/core": ["packages/core/src/index.ts"]
     }
   }
