@@ -10,7 +10,7 @@ jest.mock('../assertions', () => ({
     } catch {
       // In a real scenario, `assertIsUrl` would throw a specific error type.
       // For testing, we'll throw a generic error to indicate failure.
-      throw new Error(`Assertion Failed: Invald URL input: "${input}"`);
+      throw new Error(`Assertion Failed: Invalid URL input: "${input}"`);
     }
   }),
 }));
