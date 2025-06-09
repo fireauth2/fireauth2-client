@@ -1,0 +1,108 @@
+.fa-admin {
+  display: block;
+  position: relative;
+  height: 100%;
+
+  --fa-sidenav-width: 260px;
+  --fa-sidenav-toolbar-height: 60px;
+  --fa-sidenav-background-color: var(--mat-sys-surface-container-low);
+}
+
+.fa-sidenav {
+}
+
+.fa-app-container,
+.fa-app-content {
+  // To make sticky position work
+  overflow: unset !important;
+  display: flex !important;
+}
+
+.fa-app-container {
+  //   position: absolute !important;
+  width: 100%;
+  min-height: 100svh;
+}
+
+.fa-app-content {
+  display: flex !important;
+  height: auto !important;
+  flex: 1;
+}
+
+.fa-app-content .ng-scroll-viewport {
+  height: 100%;
+}
+
+.fa-app-content .ng-scroll-content {
+  height: 100%;
+  display: flex;
+  ffa-direction: column;
+}
+
+.fa-sidenav.fa-sidenav-start mat-toolbar,
+.fa-app-content-toolbar {
+  height: var(--fa-sidenav-toolbar-height, 56px) !important;
+}
+
+.fa-sidenav.fa-sidenav-start {
+  --mat-sidenav-container-width: var(--fa-sidenav-width);
+  --mat-sidenav-container-background-color: var(--fa-sidenav-background-color);
+
+  mat-toolbar {
+    --mat-toolbar-container-background-color: var(
+      --fa-sidenav-background-color
+    );
+    border-bottom: 0px solid;
+    border-bottom-color: var(--mat-sys-surface-dim);
+    padding-inline: 12px;
+  }
+}
+
+.fa-app-content-toolbar {
+}
+
+.fa-app-content-inner {
+  //   padding-block-start: var(--fa-sidenav-toolbar-height);
+}
+
+.with-border-t {
+  border-top: 1px solid var(--mat-sys-surface-container-highest);
+}
+
+.with-border-l {
+  border-left: 1px solid var(--mat-sys-surface-container-highest);
+}
+
+.with-border-r {
+  border-right: 1px solid var(--mat-sys-surface-container-highest);
+}
+
+.with-border-b {
+  border-bottom: 1px solid var(--mat-sys-surface-container-highest);
+}
+
+.with-border-r.fa-sidenav.fa-sidenav-start {
+  --mat-sidenav-container-divider-color: var(
+    --mat-sys-surface-container-highest
+  );
+}
+
+.with-sticky-toolbar-overlay {
+  .fa-app-content-toolbar {
+    background-color: transparent;
+    border-bottom: 0;
+    pointer-events: none;
+    // z-index: -1;
+
+    .fa-toolbar-button {
+      pointer-events: auto;
+    }
+  }
+}
+
+.fa-app-content.with-sticky-toolbar-overlay {
+  .fa-app-content-inner {
+    margin-top: calc(-1 * var(--fa-sidenav-toolbar-height));
+  }
+}
