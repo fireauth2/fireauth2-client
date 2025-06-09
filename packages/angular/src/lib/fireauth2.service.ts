@@ -16,8 +16,11 @@ import {
 } from '@fireauth2/core';
 
 import { Router, UrlTree } from '@angular/router';
-import { FIREAUTH2_CLIENT, FIREAUTH2_CONFIG } from './fireauth2.tokens';
-import { FIREAUTH2_TOKEN_STORE } from './token-store.provider';
+import {
+  FIREAUTH2_CLIENT,
+  FIREAUTH2_CONFIG,
+  FIREAUTH2_TOKEN_STORE,
+} from './fireauth2.tokens';
 
 export type LogoutOptions = {
   revokeTokens?: 'accessToken' | boolean;
