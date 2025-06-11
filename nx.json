@@ -65,10 +65,56 @@
     }
   },
   "release": {
+    "projectsRelationship": "fixed",
+    "releaseTagPattern": "v{version}",
+    "git": {
+      "tagArgs": "-s",
+      "commit": false,
+      "tag": true,
+      "tagMessage": "\"release: v{version}\""
+    },
+    "conventionalCommits": {
+      "types": {
+        "feat": {
+          "semverBump": "minor",
+          "changelog": {
+            "title": "🚀 Features"
+          }
+        },
+        "fix": {
+          "semverBump": "patch",
+          "changelog": {
+            "title": "🐞 Fixes"
+          }
+        },
+        "chore": false,
+        "docs": false,
+        "build": false,
+        "refactor": {
+          "semverBump": "patch",
+          "changelog": {
+            "title": "🧹 Refactoring"
+          }
+        },
+        "perf": {
+          "semverBump": "patch",
+          "changelog": {
+            "title": "⚡ Performance"
+          }
+        },
+        "breaking": {
+          "semverBump": "major",
+          "changelog": {
+            "title": "💥 Breaking Changes"
+          }
+        }
+      }
+    },
     "version": {
       "preVersionCommand": "pnpm dlx nx run-many -t build"
     },
     "changelog": {
+      "automaticFromRef": true,
       "workspaceChangelog": {
         "file": false,
         "createRelease": "github"
