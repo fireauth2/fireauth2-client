@@ -1,6 +1,12 @@
 {
   "name": "@fireauth2/angular",
   "version": "0.1.0",
+  "license": "MPL-2.0",
+  "author": "Nelson Dominguez <ekkolon@proton.me>",
+  "repository": {
+    "url": "https://github.com/ekkolon/fireauth2-client",
+    "directory": "packages/angular"
+  },
   "peerDependencies": {
     "@angular/common": "^20.0.2",
     "@angular/core": "^20.0.2",
@@ -8,5 +14,13 @@
     "@angular/fire": "^20.0.0",
     "@fireauth2/core": "^0.1.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "files": [
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }
