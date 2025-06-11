@@ -1,7 +1,7 @@
 import {
-  FireAuth2Error,
-  FireAuth2ErrorCodeEnum,
-  FireAuth2ErrorTypeEnum,
+  FireAuthError,
+  FireAuthErrorCodeEnum,
+  FireAuthErrorTypeEnum,
 } from '../../errors';
 
 import { assertIsUrl } from './assertIsUrl';
@@ -13,10 +13,10 @@ export function assertValidServerUrl(url: unknown): asserts url is string {
   const isLoopback = ['localhost', '127.0.0.1', '0.0.0.0'].includes(hostname);
 
   if (!isLoopback && protocol !== 'https:') {
-    throw new FireAuth2Error({
+    throw new FireAuthError({
       message: `Insecure server URL: "${url}". Use HTTPS for all non-localhost environments.`,
-      code: FireAuth2ErrorCodeEnum.InternalError,
-      type: FireAuth2ErrorTypeEnum.Internal,
+      code: FireAuthErrorCodeEnum.InternalError,
+      type: FireAuthErrorTypeEnum.Internal,
     });
   }
 }

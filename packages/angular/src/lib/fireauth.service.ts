@@ -1,6 +1,6 @@
 import { DOCUMENT, inject, Injectable } from '@angular/core';
 import {
-  Auth,
+  Auth as AngularFireAuth,
   GoogleAuthProvider,
   signInWithCredential,
   UserCredential,
@@ -8,94 +8,100 @@ import {
 import {
   AuthorizationSuccessResponseParams,
   extractAuthorizationResponse,
+  Auth as FireAuthInterface,
   GetAuthorizationUrlRequest,
+  IntrospectTokenResponse,
   IntrospectTokenTypeHint,
   isAuthorizationSuccessResponse,
   isTokenExpiringSoon,
+  LogoutOptions,
   removeAuthorizationResponseParams,
+  RevokeTokenOptions,
 } from '@fireauth2/core';
 
 import { Router, UrlTree } from '@angular/router';
 import {
-  FIREAUTH2_CLIENT,
-  FIREAUTH2_CONFIG,
-  FIREAUTH2_TOKEN_STORE,
-} from './fireauth2.tokens';
-
-export type LogoutOptions = {
-  revokeTokens?: 'accessToken' | boolean;
-};
+  FIREAUTH_CLIENT,
+  FIREAUTH_CONFIG,
+  FIREAUTH_TOKEN_STORE,
+} from './fireauth.tokens';
 
 @Injectable()
-export class FireAuth2 {
+export class FireAuth implements FireAuthInterface {
   private readonly document = inject(DOCUMENT);
   private readonly router = inject(Router);
 
-  private readonly auth = inject(Auth);
-  private readonly client = inject(FIREAUTH2_CLIENT);
-  private readonly tokenStore = inject(FIREAUTH2_TOKEN_STORE);
-  private readonly config = inject(FIREAUTH2_CONFIG);
+  private readonly angularFireAuth = inject(AngularFireAuth);
+  private readonly client = inject(FIREAUTH_CLIENT);
+  private readonly tokenStore = inject(FIREAUTH_TOKEN_STORE);
+  private readonly config = inject(FIREAUTH_CONFIG);
 
   async getAccessToken(): Promise<string | null> {
-    const token = await this.tryRefreshToken();
-    return token?.access_token as never;
+    const token = await this.tryRefreshAccessToken();
+    return token?.access_token ?? null;
   }
 
   async getIdToken(): Promise<string | null> {
-    const token = await this.tryRefreshToken();
-    return token?.id_token as never;
+    const token = await this.tryRefreshAccessToken();
+    return token?.id_token ?? null;
   }
 
-  async getTokenInfo() {
+  async getTokenInfo(): Promise<IntrospectTokenResponse | null> {
     const token = await this.tokenStore.get();
-    if (token?.access_token) {
-      try {
-        await this.client.introspect({
-          token: token.id_token,
-          token_type_hint: IntrospectTokenTypeHint.IdToken,
-        });
-      } catch {
-        await this.tokenStore.set(null);
-      }
+    if (token?.access_token == null) {
+      return null;
     }
+    
+    return this.client.introspect({
+      token: token.id_token,
+      token_type_hint: IntrospectTokenTypeHint.IdToken,
+    });
   }
 
-  async login(request: GetAuthorizationUrlRequest): Promise<void> {
+  async startLogin(request: GetAuthorizationUrlRequest): Promise<void> {
     const url = await this.client.getAuthorizationUrl(request);
     this.document.defaultView?.location.replace(url);
     return;
   }
 
-  async logout(options?: LogoutOptions) {
-    await this.auth.signOut();
-    await this.tokenStore.clear();
+  async logout(options?: LogoutOptions): Promise<void> {
+    try {
+      await this.angularFireAuth.signOut();
+      const skipTokensRevocation =
+        options?.revokeTokens === false ||
+        this.config.revokeTokensAfterLogout === false;
 
-    const skipTokensRevocation =
-      options?.revokeTokens === false ||
-      this.config.revokeTokensAfterLogout === false;
+      if (skipTokensRevocation) return;
 
-    if (skipTokensRevocation) return;
+      const shouldRevokeAccessToken =
+        options?.revokeTokens === 'accessToken' ||
+        this.config.revokeTokensAfterLogout === 'accessToken';
 
-    const shouldRevokeAccessToken =
-      options?.revokeTokens === 'accessToken' ||
-      this.config.revokeTokensAfterLogout === 'accessToken';
+      const revokeRefreshToken =
+        shouldRevokeAccessToken && this.config.revokeTokensAfterLogout === true;
 
-    const shouldRevokeAllTokens =
-      shouldRevokeAccessToken && this.config.revokeTokensAfterLogout === true;
+      await this.revokeAccessToken({ revokeRefreshToken });
+    } finally {
+      await this.tokenStore.clear();
+    }
 
-    await this.revokeAccessToken(shouldRevokeAllTokens);
+    return;
   }
 
-  async tryFinishLogin(): Promise<void> {
-    await this.auth.authStateReady();
-    if (this.auth.currentUser) {
+  async tryFinishLogin(): Promise<
+    AuthorizationSuccessResponseParams | undefined
+  > {
+    await this.angularFireAuth.authStateReady();
+    if (this.angularFireAuth.currentUser) {
       // User already signed in
-      return;
+      return undefined;
     }
+
+    console.log('LOCATION:HREF', this.document.location.href);
 
     const token = extractAuthorizationResponse(this.document.location.href);
     if (token == null) {
-      return;
+      return undefined;
     }
 
     const isResponseError = !isAuthorizationSuccessResponse(token);
@@ -123,9 +129,11 @@ export class FireAuth2 {
         this.router.navigate(urlSegmentsOrTree);
       }
     }
+
+    return token;
   }
 
-  async tryRefreshToken(): Promise<AuthorizationSuccessResponseParams> {
+  async tryRefreshAccessToken(): Promise<AuthorizationSuccessResponseParams> {
     const token = await this.tokenStore.get();
 
     const canRefresh = await this.canRefreshAccessToken(token);
@@ -137,10 +145,16 @@ export class FireAuth2 {
     return token as AuthorizationSuccessResponseParams;
   }
 
-  private async canRefreshAccessToken(
+  async refreshAccessToken(): Promise<AuthorizationSuccessResponseParams> {
+    const response = await this.client.exchangeRefreshToken();
+    await this.tokenStore.set(response);
+    return response;
+  }
+
+  async canRefreshAccessToken(
     token: AuthorizationSuccessResponseParams | null,
   ): Promise<boolean> {
-    if (this.auth.currentUser == null) return false;
+    if (this.angularFireAuth.currentUser == null) return false;
     if (token == null) return true;
 
     return isTokenExpiringSoon(
@@ -150,25 +164,19 @@ export class FireAuth2 {
     );
   }
 
-  private async refreshAccessToken(): Promise<AuthorizationSuccessResponseParams> {
-    const response = await this.client.exchangeRefreshToken();
-    await this.tokenStore.set(response);
-    return response;
-  }
-
-  private async revokeAccessToken(revokeRefreshToken?: boolean) {
+  async revokeAccessToken(options?: RevokeTokenOptions): Promise<void> {
     try {
       const token = await this.tokenStore.get();
       if (token == null) {
         return;
       }
 
-      await this.client.revoke({
+      return this.client.revoke({
         access_token: token.access_token,
-        revoke_refresh_token: revokeRefreshToken,
+        revoke_refresh_token: options?.revokeRefreshToken,
       });
-    } finally {
-      await this.tokenStore.clear();
+    } catch {
+      return this.tokenStore.clear();
     }
   }
 
@@ -183,7 +191,10 @@ export class FireAuth2 {
     accessToken?: string | null,
   ): Promise<UserCredential> {
     const credential = GoogleAuthProvider.credential(idToken, accessToken);
-    const userCredential = await signInWithCredential(this.auth, credential);
+    const userCredential = await signInWithCredential(
+      this.angularFireAuth,
+      credential,
+    );
     return userCredential;
   }
 }

@@ -35,5 +35,4 @@ bootstrapApplication(AppComponent, {
     }),
   ],
 });
-
 ```

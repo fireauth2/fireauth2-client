@@ -1,6 +1,9 @@
-import { AuthTokenStore, AuthorizationSuccessResponseParams } from "../contracts";
+import {
+  AuthTokenStore,
+  AuthorizationSuccessResponseParams,
+} from '../contracts';
 
-const TOKEN_KEY = 'fireauth2.token';
+const TOKEN_KEY = 'fireauth.token';
 
 export class BrowserTokenStore implements AuthTokenStore {
   async get(): Promise<AuthorizationSuccessResponseParams | null> {

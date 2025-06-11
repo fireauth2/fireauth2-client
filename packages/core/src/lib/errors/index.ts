@@ -1,3 +1,3 @@
-export * from './FireAuth2Error';
-export * from './FireAuth2ErrorCodes';
-export * from './FireAuth2ErrorTypes';
+export * from './FireAuthError';
+export * from './FireAuthErrorCodes';
+export * from './FireAuthErrorTypes';

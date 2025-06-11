@@ -1,4 +1,3 @@
-
 export type DecodedAccessToken = {
   sub: string;
   picture?: string;

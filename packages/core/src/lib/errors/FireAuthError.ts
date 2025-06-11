@@ -1,8 +1,7 @@
-import { FireAuth2ErrorCode } from "./FireAuth2ErrorCodes";
-import { FireAuth2ErrorType } from "./FireAuth2ErrorTypes";
+import { FireAuth2ErrorCode } from './FireAuthErrorCodes';
+import { FireAuth2ErrorType } from './FireAuthErrorTypes';
 
-
-export interface FireAuth2ErrorJSON {
+export interface FireAuthErrorJSON {
   name: string;
   message: string;
   code: FireAuth2ErrorCode;
@@ -12,7 +11,7 @@ export interface FireAuth2ErrorJSON {
   stack?: string;
 }
 
-export class FireAuth2Error extends Error {
+export class FireAuthError extends Error {
   readonly code: FireAuth2ErrorCode;
   readonly type: FireAuth2ErrorType;
   readonly status?: number;
@@ -26,7 +25,7 @@ export class FireAuth2Error extends Error {
     cause?: Error;
   }) {
     super(options.message);
-    this.name = 'FireAuth2Error';
+    this.name = 'FireAuthError';
     this.code = options.code ?? 'unknown';
     this.type = options.type;
     this.status = options.status;
@@ -36,11 +35,11 @@ export class FireAuth2Error extends Error {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (typeof (Error as any).captureStackTrace === 'function') {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (Error as any).captureStackTrace(this, FireAuth2Error);
+      (Error as any).captureStackTrace(this, FireAuthError);
     }
   }
 
-  toJSON(): FireAuth2ErrorJSON {
+  toJSON(): FireAuthErrorJSON {
     return {
       name: this.name,
       message: this.message,
@@ -52,8 +51,8 @@ export class FireAuth2Error extends Error {
     };
   }
 
-  static fromJSON(json: FireAuth2ErrorJSON): FireAuth2Error {
-    return new FireAuth2Error({
+  static fromJSON(json: FireAuthErrorJSON): FireAuthError {
+    return new FireAuthError({
       message: json.message,
       code: json.code,
       type: json.type,
@@ -62,4 +61,3 @@ export class FireAuth2Error extends Error {
     });
   }
 }
-

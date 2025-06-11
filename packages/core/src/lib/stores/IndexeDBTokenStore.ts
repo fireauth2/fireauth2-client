@@ -1,7 +1,10 @@
-import { AuthTokenStore, AuthorizationSuccessResponseParams } from "../contracts";
+import {
+  AuthTokenStore,
+  AuthorizationSuccessResponseParams,
+} from '../contracts';
 
-const DB_NAME = 'fireauth2';
-const STORE_NAME = 'token';
+const DB_NAME = 'fireauth';
+const STORE_NAME = 'session';
 const DB_VERSION = 1;
 const TOKEN_KEY = 'default';
 
