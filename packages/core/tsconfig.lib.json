@@ -1,16 +1,22 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "target": "esnext",
     "composite": true,
-    "outDir": "../../dist/out-tsc",
+    "target": "esnext",
     "declaration": true,
-    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "declarationMap": false,
+    "outDir": "../../dist/packages/core", // important
+    "rootDir": "./src",
     "inlineSources": true,
     "types": [],
     "lib": ["DOM", "DOM.Iterable", "ES2022"]
   },
-  "include": ["src/**/*.ts"],
-  "references": [],
-  "exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"]
+  "exclude": [
+    "src/**/*.spec.ts",
+    "src/test-setup.ts",
+    "jest.config.ts",
+    "src/**/*.test.ts"
+  ],
+  "include": ["src/**/*.ts"]
 }

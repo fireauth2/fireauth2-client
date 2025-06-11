@@ -1,22 +1,31 @@
 {
   "name": "@fireauth2/core",
   "version": "0.1.0",
-  "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "license": "MPL-2.0",
+  "author": "Nelson Dominguez <ekkolon@proton.me>",
+  "repository": {
+    "url": "https://github.com/ekkolon/fireauth2-client",
+    "directory": "packages/core"
+  },
+  "main": "./index.js",
+  "module": "./index.js",
+  "types": "./src/index.d.ts",
+  "dependencies": {},
   "exports": {
     "./package.json": "./package.json",
     ".": {
       "development": "./src/index.ts",
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "default": "./dist/index.js"
+      "types": "./src/lib/index.d.ts",
+      "import": "./index.js",
+      "default": "./index.js"
     }
   },
   "files": [
-    "dist",
-    "!**/*.tsbuildinfo"
+    "src/lib",
+    "README.md",
+    "LICENSE"
   ],
-  "dependencies": {}
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }
