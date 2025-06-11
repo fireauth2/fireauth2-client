@@ -10,6 +10,7 @@
   "main": "./index.js",
   "module": "./index.js",
   "types": "./src/index.d.ts",
+  "dependencies": {},
   "exports": {
     "./package.json": "./package.json",
     ".": {
@@ -24,5 +25,7 @@
     "README.md",
     "LICENSE"
   ],
-  "dependencies": {}
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }
