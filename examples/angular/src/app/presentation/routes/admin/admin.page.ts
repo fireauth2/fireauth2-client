@@ -12,7 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router, RouterOutlet } from '@angular/router';
-import { injectFireAuth2 } from '@fireauth2/angular';
+import { FireAuth } from '@fireauth2/angular';
 
 export const MAT_COMPONENTS = [
   MatIconModule,
@@ -35,7 +35,7 @@ export const MAT_COMPONENTS = [
 })
 export default class AdminPage {
   private readonly router = inject(Router);
-  private readonly fireAuth2 = injectFireAuth2();
+  private readonly fireAuth2 = inject(FireAuth);
 
   readonly isSidenavEndOpened = signal(false);
 

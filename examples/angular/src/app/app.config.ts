@@ -11,7 +11,7 @@ import {
   withEventReplay,
 } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
-import { provideFireAuth2 } from '@fireauth2/angular';
+import { provideFireAuth } from '@fireauth2/angular';
 import { appRoutes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -39,7 +39,7 @@ export const appConfig: ApplicationConfig = {
     provideFirestore(() => getFirestore()),
 
     // FireAuth2
-    provideFireAuth2({
+    provideFireAuth({
       clientServerUrl: 'http://localhost:8080',
       redirectToAfterFinishLogin: '/',
       revokeTokensAfterLogout: false,
