@@ -9,11 +9,34 @@
       "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "packages/core/dist",
+        "outputPath": "dist/packages/core",
         "main": "packages/core/src/index.ts",
         "tsConfig": "packages/core/tsconfig.lib.json",
+        "declarationRootDir": "",
+        "platform": "browser",
+        "esbuildOptions": {},
         "format": ["esm"],
-        "declarationRootDir": "packages/core/src"
+        "deleteOutputPath": true,
+        "generatePackageJson": true,
+        "target": "es2022",
+        "bundle": true,
+        "assets": [
+          {
+            "input": "packages/core",
+            "glob": "README.md",
+            "output": "."
+          },
+          {
+            "input": "packages/core",
+            "glob": "LICENSE",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/{projectRoot}"
       }
     }
   }
