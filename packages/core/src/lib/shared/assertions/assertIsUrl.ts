@@ -1,7 +1,7 @@
 import {
-  FireAuth2Error,
-  FireAuth2ErrorCodeEnum,
-  FireAuth2ErrorTypeEnum,
+  FireAuthError,
+  FireAuthErrorCodeEnum,
+  FireAuthErrorTypeEnum,
 } from '../../errors';
 
 /**
@@ -18,10 +18,10 @@ export function assertIsUrl(url: unknown): asserts url is string | URL {
   try {
     new URL(url as never);
   } catch (error) {
-    throw new FireAuth2Error({
+    throw new FireAuthError({
       message: `Invalid URL: "${url}"`,
-      code: FireAuth2ErrorCodeEnum.InvalidRequest,
-      type: FireAuth2ErrorTypeEnum.Request,
+      code: FireAuthErrorCodeEnum.InvalidRequest,
+      type: FireAuthErrorTypeEnum.Request,
       cause: error instanceof Error ? error : undefined,
     });
   }

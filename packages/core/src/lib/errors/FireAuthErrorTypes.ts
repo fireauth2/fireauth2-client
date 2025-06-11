@@ -1,4 +1,4 @@
-export enum FireAuth2ErrorTypeEnum {
+export enum FireAuthErrorTypeEnum {
   Auth = 'auth',
   AuthResponse = 'auth_response',
   Token = 'token',
@@ -13,4 +13,4 @@ export enum FireAuth2ErrorTypeEnum {
   Unknown = 'unknown',
 }
 
-export type FireAuth2ErrorType = `${FireAuth2ErrorTypeEnum}`;
+export type FireAuth2ErrorType = `${FireAuthErrorTypeEnum}`;

@@ -1,4 +1,4 @@
-export enum FireAuth2ErrorCodeEnum {
+export enum FireAuthErrorCodeEnum {
   Unauthenticated = 'unauthenticated',
   Unauthorized = 'unauthorized',
   TokenExpired = 'token_expired',
@@ -13,32 +13,32 @@ export enum FireAuth2ErrorCodeEnum {
   Unknown = 'unknown',
 }
 
-export type FireAuth2ErrorCode = `${FireAuth2ErrorCodeEnum}`;
+export type FireAuth2ErrorCode = `${FireAuthErrorCodeEnum}`;
 
 /** Maps HTTP status codes to FireAuth2ErrorCodeEnum for better error semantics */
 export function mapHttpStatusToErrorCode(
   status: number,
-): FireAuth2ErrorCodeEnum {
+): FireAuthErrorCodeEnum {
   if (status >= 400 && status < 500) {
     switch (status) {
       case 401:
-        return FireAuth2ErrorCodeEnum.Unauthorized;
+        return FireAuthErrorCodeEnum.Unauthorized;
       case 403:
-        return FireAuth2ErrorCodeEnum.Unauthorized;
+        return FireAuthErrorCodeEnum.Unauthorized;
       case 404:
-        return FireAuth2ErrorCodeEnum.NotFound;
+        return FireAuthErrorCodeEnum.NotFound;
       case 409:
-        return FireAuth2ErrorCodeEnum.Conflict;
+        return FireAuthErrorCodeEnum.Conflict;
       case 429:
-        return FireAuth2ErrorCodeEnum.RateLimited;
+        return FireAuthErrorCodeEnum.RateLimited;
       case 400:
-        return FireAuth2ErrorCodeEnum.InvalidRequest;
+        return FireAuthErrorCodeEnum.InvalidRequest;
       default:
-        return FireAuth2ErrorCodeEnum.Unauthorized;
+        return FireAuthErrorCodeEnum.Unauthorized;
     }
   }
   if (status >= 500) {
-    return FireAuth2ErrorCodeEnum.InternalError;
+    return FireAuthErrorCodeEnum.InternalError;
   }
-  return FireAuth2ErrorCodeEnum.Unknown;
+  return FireAuthErrorCodeEnum.Unknown;
 }

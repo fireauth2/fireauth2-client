@@ -1,7 +1,7 @@
 import {
-  FireAuth2Error,
-  FireAuth2ErrorCodeEnum,
-  FireAuth2ErrorTypeEnum,
+  FireAuthError,
+  FireAuthErrorCodeEnum,
+  FireAuthErrorTypeEnum,
 } from '../../errors';
 
 /**
@@ -16,10 +16,10 @@ export function assertNonEmptyIdToken(
   paramName = 'idToken',
 ): asserts value is string {
   if (typeof value !== 'string' || value.trim() === '') {
-    throw new FireAuth2Error({
+    throw new FireAuthError({
       message: `"${paramName}" must be a non-empty string representing a valid ID token.`,
-      code: FireAuth2ErrorCodeEnum.Unauthorized,
-      type: FireAuth2ErrorTypeEnum.Auth,
+      code: FireAuthErrorCodeEnum.Unauthorized,
+      type: FireAuthErrorTypeEnum.Auth,
     });
   }
 }

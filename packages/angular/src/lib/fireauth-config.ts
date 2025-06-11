@@ -2,7 +2,7 @@ import { UrlTree } from '@angular/router';
 
 type UrlLike = string | URL;
 
-export interface FireAuth2Config {
+export interface FireAuthConfig {
   /**
    * The URL to the FireAuth2 server.
    */
@@ -60,9 +60,8 @@ export interface FireAuth2Config {
 }
 
 /** @internal */
-export const defaultFireAuth2Config: Omit<FireAuth2Config, 'clientServerUrl'> =
-  {
-    canRefreshBeforeExpiringInMins: 5,
-    cleanUpUrlFragmentAfterLogin: true,
-    revokeTokensAfterLogout: false,
-  };
+export const defaultFireAuthConfig: Omit<FireAuthConfig, 'clientServerUrl'> = {
+  canRefreshBeforeExpiringInMins: 5,
+  cleanUpUrlFragmentAfterLogin: true,
+  revokeTokensAfterLogout: false,
+};

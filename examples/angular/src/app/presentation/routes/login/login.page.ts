@@ -61,7 +61,12 @@ export default class LoginPage {
 
   async login() {
     await this.fireAuth2.login({
-      scope: [],
+      scope: [
+        'email',
+        'openid',
+        'profile',
+        'https://www.googleapis.com/auth/gmail.readonly',
+      ],
       include_granted_scopes: true,
       access_type: AccessType.Offline,
       prompt: Prompt.Consent,

@@ -10,8 +10,8 @@ import {
   RevokeTokenRequest,
 } from '../contracts';
 import {
-  FireAuth2Error,
-  FireAuth2ErrorTypeEnum,
+  FireAuthError,
+  FireAuthErrorTypeEnum,
   mapHttpStatusToErrorCode,
 } from '../errors';
 import {
@@ -24,7 +24,7 @@ import {
 
 type Params = Record<string, string | undefined | boolean | number>;
 
-export class FireAuth2Client implements OAuthClient {
+export class FireAuthClient implements OAuthClient {
   #serverUrl: URL;
   #idTokenPromise: Promise<IdTokenValue>;
 
@@ -61,10 +61,10 @@ export class FireAuth2Client implements OAuthClient {
     });
 
     if (!response.ok) {
-      throw new FireAuth2Error({
+      throw new FireAuthError({
         message: `exchangeRefreshToken failed with status: ${response.status} ${response.statusText}`,
         code: mapHttpStatusToErrorCode(response.status),
-        type: FireAuth2ErrorTypeEnum.Network,
+        type: FireAuthErrorTypeEnum.Network,
       });
     }
 
@@ -84,10 +84,10 @@ export class FireAuth2Client implements OAuthClient {
     });
 
     if (!response.ok) {
-      throw new FireAuth2Error({
+      throw new FireAuthError({
         message: `revoke failed with status: ${response.status} ${response.statusText}`,
         code: mapHttpStatusToErrorCode(response.status),
-        type: FireAuth2ErrorTypeEnum.Network,
+        type: FireAuthErrorTypeEnum.Network,
       });
     }
   }
@@ -108,10 +108,10 @@ export class FireAuth2Client implements OAuthClient {
     });
 
     if (!response.ok) {
-      throw new FireAuth2Error({
+      throw new FireAuthError({
         message: `introspect failed with status: ${response.status} ${response.statusText}`,
         code: mapHttpStatusToErrorCode(response.status),
-        type: FireAuth2ErrorTypeEnum.Network,
+        type: FireAuthErrorTypeEnum.Network,
       });
     }
 

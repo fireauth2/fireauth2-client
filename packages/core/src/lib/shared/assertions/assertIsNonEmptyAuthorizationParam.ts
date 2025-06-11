@@ -1,7 +1,7 @@
 import {
-  FireAuth2Error,
-  FireAuth2ErrorCodeEnum,
-  FireAuth2ErrorTypeEnum,
+  FireAuthError,
+  FireAuthErrorCodeEnum,
+  FireAuthErrorTypeEnum,
 } from '../../errors';
 
 /**
@@ -16,10 +16,10 @@ export function assertIsNonEmptyAuthorizationParam(
   value: string | null,
 ): asserts value is string {
   if (value === null || value === undefined || value.trim() === '') {
-    throw new FireAuth2Error({
+    throw new FireAuthError({
       message: `Missing or empty "${name}" parameter in authorization response`,
-      code: FireAuth2ErrorCodeEnum.InvalidAuthResponseParam,
-      type: FireAuth2ErrorTypeEnum.AuthResponse,
+      code: FireAuthErrorCodeEnum.InvalidAuthResponseParam,
+      type: FireAuthErrorTypeEnum.AuthResponse,
     });
   }
 }

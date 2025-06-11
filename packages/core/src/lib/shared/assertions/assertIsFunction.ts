@@ -1,7 +1,7 @@
 import {
-  FireAuth2Error,
-  FireAuth2ErrorCodeEnum,
-  FireAuth2ErrorTypeEnum,
+  FireAuthError,
+  FireAuthErrorCodeEnum,
+  FireAuthErrorTypeEnum,
 } from '../../errors';
 
 /**
@@ -17,10 +17,10 @@ export function assertIsFunction<T extends Function>(
   paramName = 'value',
 ): asserts value is T {
   if (typeof value !== 'function') {
-    throw new FireAuth2Error({
+    throw new FireAuthError({
       message: `Expected "${paramName}" to be a function, but received ${typeof value}.`,
-      code: FireAuth2ErrorCodeEnum.InternalError,
-      type: FireAuth2ErrorTypeEnum.Internal,
+      code: FireAuthErrorCodeEnum.InternalError,
+      type: FireAuthErrorTypeEnum.Internal,
     });
   }
 }
