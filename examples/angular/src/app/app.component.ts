@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
   },
 })
 export class AppComponent {
-  title = 'FireAuth2';
+  title = 'FireAuth';
 
   constructor(matIconRegistry: MatIconRegistry) {
     matIconRegistry.setDefaultFontSetClass('material-symbols-rounded');

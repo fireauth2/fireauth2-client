@@ -12,7 +12,7 @@ import { Auth } from '@angular/fire/auth';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { injectFireAuth2 } from '@fireauth2/angular';
+import { FireAuth } from '@fireauth2/angular';
 import { AccessType, Prompt } from '@fireauth2/core';
 
 @Component({
@@ -29,7 +29,7 @@ import { AccessType, Prompt } from '@fireauth2/core';
 export default class LoginPage {
   private readonly auth = inject(Auth);
   private readonly platformId = inject(PLATFORM_ID);
-  private readonly fireAuth2 = injectFireAuth2();
+  private readonly fireAuth2 = inject(FireAuth);
   private readonly document = inject(DOCUMENT);
 
   isServer = false;
@@ -60,7 +60,7 @@ export default class LoginPage {
   }
 
   async login() {
-    await this.fireAuth2.login({
+    await this.fireAuth2.startLogin({
       scope: [
         'email',
         'openid',

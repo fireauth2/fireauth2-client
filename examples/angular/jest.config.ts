@@ -1,6 +1,7 @@
 export default {
   displayName: 'example-angular',
   preset: '../../jest.preset.js',
+  testEnvironment: './src/testing/dom.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory: '../../coverage/examples/angular',
   transform: {
