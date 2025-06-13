@@ -51,7 +51,7 @@ export class FireAuth implements FireAuthInterface {
     if (token?.access_token == null) {
       return null;
     }
-    
+
     return this.client.introspect({
       token: token.id_token,
       token_type_hint: IntrospectTokenTypeHint.IdToken,
@@ -97,8 +97,6 @@ export class FireAuth implements FireAuthInterface {
       return undefined;
     }
 
-    console.log('LOCATION:HREF', this.document.location.href);
-
     const token = extractAuthorizationResponse(this.document.location.href);
     if (token == null) {
       return undefined;
@@ -138,7 +136,6 @@ export class FireAuth implements FireAuthInterface {
 
     const canRefresh = await this.canRefreshAccessToken(token);
     if (canRefresh) {
-      console.log('Refreshing token...');
       return this.refreshAccessToken();
     }
 
