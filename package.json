@@ -1,5 +1,5 @@
 {
-  "name": "@fireauth2-client/source",
+  "name": "@fireauth2/source",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {

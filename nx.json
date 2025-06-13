@@ -67,6 +67,7 @@
   "release": {
     "projectsRelationship": "fixed",
     "releaseTagPattern": "v{version}",
+    "projects": ["packages/*"],
     "git": {
       "commitMessage": "chore(release): v{version}",
       "commit": true,
