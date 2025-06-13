@@ -11,6 +11,12 @@ JavaScript SDK for [FireAuth2 Servers](https://github.com/ekkolon/fireauth2)
 
     Angular integration
 
+## Examples
+
+- [`Angular`](./examples/angular/)
+
+    Angular v20 example application
+
 ## 📄 License
 
 This project is licensed under the GNU Affero General Public License v3.0.
