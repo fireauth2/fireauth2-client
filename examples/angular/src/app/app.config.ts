@@ -24,23 +24,14 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
 
     // Firebase setup
-    provideFirebaseApp(() =>
-      initializeApp({
-        projectId: 'letterflow-dev',
-        appId: '1:544886629086:web:2c238398d416c3458fd84f',
-        storageBucket: 'letterflow-dev.appspot.com',
-        apiKey: 'AIzaSyDphujp4rssVZqTKLbHyEz0NgJjsH0rvOc',
-        authDomain: 'letterflow-dev.firebaseapp.com',
-        messagingSenderId: '544886629086',
-        measurementId: 'G-7RY0L3RFT9',
-      }),
-    ),
+    provideFirebaseApp(() => initializeApp(process.env.firebase)),
     providerFirebaseAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
 
     // FireAuth2
     provideFireAuth({
-      clientServerUrl: 'http://localhost:8080',
+      clientServerUrl:
+        process.env?.fireauth?.serverUrl ?? 'http://localhost:8080',
       redirectToAfterFinishLogin: '/',
       revokeTokensAfterLogout: false,
       cleanUpUrlFragmentAfterLogin: true,

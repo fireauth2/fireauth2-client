@@ -7,7 +7,7 @@
   "tags": ["example"],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
+      "executor": "@nx/angular:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/examples/angular",
@@ -31,7 +31,8 @@
         "ssr": {
           "entry": "examples/angular/src/server.ts"
         },
-        "prerender": true
+        "prerender": true,
+        "plugins": ["tools/esbuild/env-var.plugin.ts"]
       },
       "configurations": {
         "production": {
@@ -59,7 +60,7 @@
     },
     "serve": {
       "continuous": true,
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@nx/angular:dev-server",
       "configurations": {
         "production": {
           "buildTarget": "example-angular:build:production"
