@@ -4,7 +4,7 @@
   "license": "MPL-2.0",
   "author": "Nelson Dominguez <ekkolon@proton.me>",
   "repository": {
-    "url": "https://github.com/ekkolon/fireauth2-client",
+    "url": "https://github.com/fireauth2/fireauth2-client",
     "directory": "packages/angular"
   },
   "peerDependencies": {
@@ -19,8 +19,5 @@
     "src",
     "README.md",
     "LICENSE"
-  ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  }
+  ]
 }
