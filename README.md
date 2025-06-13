@@ -10,3 +10,9 @@ JavaScript SDK for [FireAuth2 Servers](https://github.com/ekkolon/fireauth2)
 - [`@fireauth2/angular`](./packages/angular/)
 
     Angular integration
+
+## 📄 License
+
+This project is licensed under the GNU Affero General Public License v3.0.
+
+> © 2025 Nelson Dominguez
