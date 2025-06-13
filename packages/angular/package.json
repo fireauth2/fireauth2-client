@@ -1,7 +1,7 @@
 {
   "name": "@fireauth2/angular",
   "version": "0.1.1",
-  "license": "MPL-2.0",
+  "license": "AGPL-3.0-only",
   "author": "Nelson Dominguez <ekkolon@proton.me>",
   "repository": {
     "url": "https://github.com/fireauth2/fireauth2-client",
