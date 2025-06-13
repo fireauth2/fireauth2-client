@@ -68,8 +68,10 @@
     "projectsRelationship": "fixed",
     "releaseTagPattern": "v{version}",
     "git": {
+      "commitMessage": "chore(release): v{version}",
+      "commit": true,
+      "commitArgs": "-s",
       "tagArgs": "-s",
-      "commit": false,
       "tag": true,
       "tagMessage": "\"release: v{version}\""
     },
