@@ -1,0 +1,20 @@
+# Ignore everything
+*
+
+# Except essential root-level files
+!package.json
+!pnpm-lock.yaml
+!nx.json
+!.npmrc
+!tsconfig.base.json 
+
+# Keep workspace-level files
+!workspace.json
+!project.json
+
+# Include packages and examples and their contents
+!packages/
+!packages/**
+
+!examples/
+!examples/**
