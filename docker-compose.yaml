@@ -1,0 +1,44 @@
+# Secrets shared among multiple services
+secrets:
+  # Google Cloud Platform service account credentials
+  google-application-credentials:
+    file: ${GOOGLE_APPLICATION_CREDENTIALS}
+
+services:
+  # Angular example application
+  fireauth2-angular:
+    image: fireauth2/example-angular:latest
+    build:
+      context: .
+      dockerfile: ./examples/angular/Dockerfile
+    
+    ports:
+      - "4000:4000"
+
+    environment:
+      NODE_ENV: production
+      PORT: 4000
+    
+    # Restart the container if it exits unexpectedly.
+    # 'unless-stopped' means it will restart unless explicitly stopped by the user.
+    restart: unless-stopped
+
+  # FireAuth Server
+  fireauth2:
+    image: fireauth2/fireauth2:latest
+    build:
+      context: https://github.com/fireauth2/fireauth2.git
+      dockerfile: ./fireauth2-server/Dockerfile
+    ports:
+      - 8080:8080
+    # Create a .env file in the root of this project or replace the variables 
+    # found in the .env.example file and rename it.
+    env_file: .env
+    environment:
+      # Helps detecting Docker runtime
+      - DOCKER_RUNNING=true
+      # Google environments set this variable by default.
+      # When running our services locally, however, we must provide it manually,
+      - GOOGLE_APPLICATION_CREDENTIALS=/run/secrets/google-application-credentials
+    secrets:
+      - google-application-credentials
