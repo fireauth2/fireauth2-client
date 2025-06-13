@@ -1,5 +1,6 @@
 import {
   AuthorizationErrorResponseParams,
+  AuthorizationResponseParamKey,
   AuthorizationSuccessResponseParams,
 } from '../../contracts';
 
@@ -20,8 +21,15 @@ export const isAuthorizationErrorResponse = (
 export const isAuthorizationSuccessResponse = (
   obj: unknown,
 ): obj is AuthorizationSuccessResponseParams => {
-  if (obj == null || isAuthorizationErrorResponse(obj)) return false;
+  if (obj == null || typeof obj !== 'object') return false;
+  if (isAuthorizationErrorResponse(obj)) return false;
 
-  // todo: improve type check
-  return true;
+  const requiredKeys = [
+    AuthorizationResponseParamKey.AccessToken,
+    AuthorizationResponseParamKey.IdToken,
+    AuthorizationResponseParamKey.ExpiresIn,
+    AuthorizationResponseParamKey.IssuedAt,
+  ];
+
+  return requiredKeys.every((key) => key in obj);
 };
