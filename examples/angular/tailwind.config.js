@@ -9,9 +9,21 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        'dark-green': 'var(--fa-dark-green)',
+        background: 'var(--color-background)',
+        surface: 'var(--color-surface)',
+        'primary-text': 'var(--color-primary-text)',
+        'secondary-text': 'var(--color-secondary-text)',
+        accent: 'var(--color-accent)',
+        'border-dark': 'var(--color-border-dark)',
+      },
       fontFamily: {
         sans: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         brand: ['Manrope', 'Roboto', 'sans-serif'],
+      },
+      boxShadow: {
+        bordered: 'var(--fa-shadow-bordered)',
       },
     },
   },

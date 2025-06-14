@@ -1,6 +1,6 @@
 .fa-login-page {
   .fa-login__form {
-    max-width: 425px;
+    max-width: 480px;
     margin: 0 auto;
     width: 100%;
     flex-grow: 0;
@@ -26,6 +26,16 @@
   @-webkit-keyframes spin {
     to {
       -webkit-transform: rotate(360deg);
+    }
+  }
+
+  .fa-continue-button {
+    @apply flex items-center justify-center w-full gap-4 shadow-bordered h-12 rounded-full px-4 pl-3 transition;
+
+    @apply bg-neutral-900 text-white hover:bg-neutral-800; // Light mode: darkish bg
+
+    .dark & {
+      @apply bg-white text-black hover:bg-gray-100; // Dark mode: lightish bg
     }
   }
 }

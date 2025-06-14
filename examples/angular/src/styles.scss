@@ -1,15 +1,52 @@
+:root {
+  --color-background: #ffffff;
+  --color-surface: #f5f7f6;
+  --color-primary-text: #1c1c1e;
+  --color-secondary-text: #5c5f62;
+
+  /* Accent: soft green with a hint of blue for trust */
+  --color-accent: #2e7d5d;
+
+  /* Neutral border */
+  --color-border-dark: #d2d5d3;
+
+  --fa-dark-green: #102418;
+
+  --fa-shadow-bordered:
+    rgba(0, 0, 0, 0.04) 0px 4px 20px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+html.dark {
+  --color-background: #0d1512;
+  --color-surface: #182621;
+  --color-primary-text: #f2f7f4;
+  --color-secondary-text: #9bb7a5;
+
+  /* Muted soft-accent in dark mode */
+  --color-accent: #57d7a2;
+
+  --color-border-dark: #294137;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --fa-shadow-bordered:
-    rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-}
-
 @layer components {
-  .shadow-bordered {
-    box-shadow: var(--fa-shadow-bordered);
+  body {
+    @apply bg-background text-primary-text;
+  }
+
+  .card {
+    @apply bg-surface text-primary-text border border-border-dark;
+  }
+
+  .button-primary {
+    @apply bg-accent text-black hover:brightness-110;
+  }
+
+  .text-secondary {
+    @apply text-secondaryText;
   }
 }
 

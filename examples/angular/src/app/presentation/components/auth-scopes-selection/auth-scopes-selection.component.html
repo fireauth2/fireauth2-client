@@ -1,0 +1,40 @@
+<mat-accordion class="fa-discovery-accordion" multi>
+  @for (doc of discoveryDocuments(); track doc.canonicalName) {
+    <mat-expansion-panel class="fa-discovery-expansion-panel">
+      <mat-expansion-panel-header expandedHeight="64" collapsedHeight="64">
+        <header class="flex items-center gap-4 h-12">
+          <div class="shrink-0">
+            <img class="w-10 object-contain" [src]="doc.logoUrl" alt="" />
+          </div>
+          <div>
+            <h3 class="font-semibold font-brand text-lg leading-none">
+              {{ doc.canonicalName }}
+            </h3>
+            <div class="text-muted text-sm">
+              {{ doc.shortDescription }}
+            </div>
+          </div>
+        </header>
+      </mat-expansion-panel-header>
+
+      <section class="flex flex-col gap-2">
+        <mat-selection-list
+          class="fa-login__scopes"
+          #shoes
+          hideSingleSelectionIndicator="true"
+        >
+          @for (scope of doc.lightweightScopes; track scope.id) {
+            <mat-list-option class="fa-scope-option">
+              <div class="fa-scope-option__description !font-brand">
+                {{ scope.description }}
+              </div>
+              <div class="fa-scope-option__id !text-xs !font-normal">
+                {{ scope.id }}
+              </div>
+            </mat-list-option>
+          }
+        </mat-selection-list>
+      </section>
+    </mat-expansion-panel>
+  }
+</mat-accordion>

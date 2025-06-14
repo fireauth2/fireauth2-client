@@ -15,9 +15,24 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FireAuth } from '@fireauth2/angular';
 import { AccessType, Prompt } from '@fireauth2/core';
 
+import {
+  CalendarDiscoveryDocument,
+  DiscoveryDocumentClass,
+  GmailDiscoveryDocument,
+} from '../../../auth';
+import { AuthScopeSelectionComponent } from '../../components/auth-scopes-selection/auth-scopes-selection.component';
+import { ThemeSwitcherComponent } from '../../components/theme-switcher/theme-switcher.component';
+
 @Component({
   selector: 'fa-login-page',
-  imports: [CommonModule, MatButtonModule, MatToolbarModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatToolbarModule,
+    AuthScopeSelectionComponent,
+
+    ThemeSwitcherComponent,
+  ],
   templateUrl: './login.page.html',
   styleUrl: './login.page.scss',
   encapsulation: ViewEncapsulation.None,
@@ -34,6 +49,11 @@ export default class LoginPage {
 
   isServer = false;
   readonly isUser = signal(false);
+
+  readonly discoveryDocuments: DiscoveryDocumentClass[] = [
+    GmailDiscoveryDocument,
+    CalendarDiscoveryDocument,
+  ];
 
   constructor() {
     ssrLoginScreenGlitchFix: {

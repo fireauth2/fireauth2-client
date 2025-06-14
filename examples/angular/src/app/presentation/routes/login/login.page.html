@@ -17,31 +17,39 @@
       <img class="size-8" src="/img/fireauth-logo.svg" alt="FireAuth2 Logo" />
       <span class="font-brand font-extrabold">FireAuth2</span>
     </div>
-    <div class="flex items-center"></div>
-    <div></div>
+    <div class="flex items-center flex-1"></div>
+    <div>
+      <fa-theme-switcher></fa-theme-switcher>
+    </div>
   </mat-toolbar>
   <main class="flex flex-col flex-1">
     <div class="flex flex-col flex-1 items-center justify-center">
-      <form class="fa-login__form rounded-2xl shadow-bordered">
-        <header>
-          <div class="flex items-center gap-4">
-            <h1 class="text-2xl font-sans font-semibold">Sign in</h1>
-          </div>
-          <div class="mt-4 text-gray-700">
-            <p>
-              Say goodbye to credential headaches. FireAuth2 makes integrating
-              Google OAuth 2.0 with your Firebase Authentication effortless and
-              secure.
-            </p>
-          </div>
-        </header>
+      <header class="fa-login__form">
+        <div class="flex items-center gap-4">
+          <h1 class="text-3xl font-brand font-black">Sign in</h1>
+        </div>
+        <div class="mt-4 text-gray-700">
+          <p>Persistent Google OAuth 2.0 with Firebase — all in one.</p>
+        </div>
+      </header>
 
+      <form class="fa-login__form rounded-2xl shadow-bordered">
+        <section class="flex flex-col gap-4">
+          <header>
+            <h2 class="font-bold font-brand text-xl">
+              Select Google OAuth 2.0 Scopes
+            </h2>
+          </header>
+          <div class="flex flex-col">
+            <fa-auth-scopes-selection
+              [discoveryDocuments]="discoveryDocuments"
+            ></fa-auth-scopes-selection>
+          </div>
+        </section>
+      </form>
+      <form class="fa-login__form">
         <section class="mt-6">
-          <button
-            type="button"
-            class="flex items-center justify-center w-full gap-4 shadow-bordered h-12 rounded-full px-4 pl-3 hover:bg-gray-100 transition"
-            (click)="login()"
-          >
+          <button type="button" class="fa-continue-button" (click)="login()">
             <img class="size-6" src="/img/google-logo.webp" alt="Google Logo" />
             Continue with Google
           </button>
