@@ -1,7 +1,7 @@
 @let theme = currentThemeData();
 
 <button mat-icon-button [mat-menu-trigger-for]="themeMenu">
-  <mat-icon>{{ theme.icon }}</mat-icon>
+  <mat-icon>{{ theme?.icon }}</mat-icon>
 </button>
 
 <mat-menu #themeMenu>
