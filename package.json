@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "license": "AGPL-3.0-only",
   "scripts": {
-    "serve:angular": "pnpx nx serve example-angular",
-    "test:core": "pnpx nx test fireauth2-core"
+    "serve:angular": "pnpm exec nx serve example-angular",
+    "test:core": "pnpm exec nx test fireauth2-core"
   },
   "private": true,
   "dependencies": {
