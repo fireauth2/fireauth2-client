@@ -1,10 +1,17 @@
 <mat-accordion class="fa-discovery-accordion" multi>
   @for (doc of discoveryDocuments(); track doc.canonicalName) {
-    <mat-expansion-panel class="fa-discovery-expansion-panel" [expanded]="expanded()">
+    <mat-expansion-panel
+      class="fa-discovery-expansion-panel"
+      [expanded]="expanded()"
+    >
       <mat-expansion-panel-header expandedHeight="64" collapsedHeight="64">
         <header class="flex items-center gap-4 h-12">
           <div class="shrink-0">
-            <img class="w-8 sm:w-10 object-contain" [src]="doc.logoUrl" alt="" />
+            <img
+              class="w-8 sm:w-10 object-contain"
+              [src]="doc.logoUrl"
+              alt=""
+            />
           </div>
           <div>
             <h3 class="font-semibold font-brand text-lg leading-none">
