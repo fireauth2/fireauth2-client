@@ -4,7 +4,10 @@
   "license": "AGPL-3.0-only",
   "scripts": {
     "serve:angular": "pnpm exec nx serve example-angular",
-    "test:core": "pnpm exec nx test fireauth2-core"
+    "test:core": "pnpm exec nx test fireauth2-core",
+    "test:all": "pnpm exec nx affected -t test",
+    "lint:all": "pnpm exec nx affected -t lint",
+    "format:all": "pnpm exec nx format --all"
   },
   "private": true,
   "dependencies": {
