@@ -4,6 +4,7 @@ import {
   Component,
   DOCUMENT,
   inject,
+  OnInit,
   PLATFORM_ID,
   signal,
   ViewEncapsulation,
@@ -29,10 +30,10 @@ import {
   GmailDiscoveryDocument,
   Scope,
 } from '../../../core/auth';
+import appConstants from '../../../core/constants/app.constants';
 import { AuthScopeSelectionComponent } from '../../components/auth-scopes-selection/auth-scopes-selection.component';
 import { GitHubLogoComponent } from '../../components/github-mark-logo/github-mark-logo.component';
 import { ThemeSwitcherComponent } from '../../components/theme-switcher/theme-switcher.component';
-import appConstants from '../../../core/constants/app.constants';
 
 const MATERIAL_COMPONENTS = [
   MatButtonModule,
@@ -63,7 +64,7 @@ const MATERIAL_COMPONENTS = [
     class: 'fa-page fa-login-page',
   },
 })
-export default class LoginPage {
+export default class LoginPage implements OnInit {
   private readonly auth = inject(Auth);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly fireAuth = inject(FireAuth);
@@ -81,18 +82,16 @@ export default class LoginPage {
   ];
 
   constructor() {
-    ssrLoginScreenGlitchFix: {
-      // When using SSR, no user exists at the first render (server).
-      // Consequently, the login page is briefly rendered even though the user is authenticated
-      // after the next render (browser).
-      // This behavior is far from ideal, in terms of user experience - to say the least.
-      //
-      // We can prevent the glitch by showing a splash screen on first render.
-      // See the template of this page.
-      this.isServer = isPlatformServer(this.platformId);
-      if (this.auth.currentUser) {
-        this.isUser.set(true);
-      }
+    // When using SSR, no user exists at the first render (server).
+    // Consequently, the login page is briefly rendered even though the user is authenticated
+    // after the next render (browser).
+    // This behavior is far from ideal, in terms of user experience - to say the least.
+    //
+    // We can prevent the glitch by showing a splash screen on first render.
+    // See the template of this page.
+    this.isServer = isPlatformServer(this.platformId);
+    if (this.auth.currentUser) {
+      this.isUser.set(true);
     }
   }
 

@@ -1,14 +1,10 @@
+import { coerceNumberProperty } from '@angular/cdk/coercion';
 import {
   ChangeDetectionStrategy,
   Component,
   input,
-  OnInit,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  coerceCssPixelValue,
-  coerceNumberProperty,
-} from '@angular/cdk/coercion';
 
 @Component({
   standalone: true,

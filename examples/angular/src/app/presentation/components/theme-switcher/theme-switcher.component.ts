@@ -20,7 +20,7 @@ enum ThemeMatIcon {
 
 interface ThemeData {
   icon: string;
-  label: String;
+  label: string;
   toggle(): void;
   isActive: Signal<boolean>;
 }
@@ -56,7 +56,7 @@ export class ThemeSwitcherComponent {
       (t) =>
         t.label.toLowerCase() === curr ||
         (curr == null && t.label === 'System'),
-    )!;
+    );
   });
 
   _delegateClickEvent(event: Event) {
@@ -69,6 +69,8 @@ export class ThemeSwitcherComponent {
       label,
       icon,
       toggle: () => {
+        // (todo) This is likely unpredictable
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return (this._themeService as any)[`set${label}Theme`]();
       },
       isActive: computed(() => {

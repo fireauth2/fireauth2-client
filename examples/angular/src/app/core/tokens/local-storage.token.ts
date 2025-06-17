@@ -1,7 +1,8 @@
 import { isPlatformBrowser } from '@angular/common';
 import { inject, InjectionToken, PLATFORM_ID } from '@angular/core';
 
-const noop = (...args: any[]): any => {};
+// eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-explicit-any
+const noop = (): any => {};
 
 const FALLBACK_STORAGE = {
   getItem: noop,

@@ -21,9 +21,10 @@ export class ThemeService {
   private readonly localStorage = inject(LOCAL_STORAGE);
   private readonly renderer: Renderer2;
 
-  currentTheme = signal<AppTheme | undefined>(undefined);
+  readonly currentTheme = signal<AppTheme | undefined>(undefined);
 
-  constructor(rendererFactory2: RendererFactory2) {
+  constructor() {
+    const rendererFactory2 = inject(RendererFactory2);
     this.renderer = rendererFactory2.createRenderer(null, null);
     const currentTheme = this.localStorage.getItem(THEME_STORAGE_KEY) as never;
     this.currentTheme.set(currentTheme);

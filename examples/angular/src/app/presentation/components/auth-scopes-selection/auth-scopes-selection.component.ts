@@ -1,4 +1,6 @@
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   input,
@@ -13,7 +15,6 @@ import {
   MatSelectionListChange,
 } from '@angular/material/list';
 import { DiscoveryDocumentClass, Scope } from '../../../core/auth';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
   standalone: true,
@@ -27,7 +28,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
     class: 'fa-auth-scopes-selection',
   },
 })
-export class AuthScopeSelectionComponent {
+export class AuthScopeSelectionComponent implements AfterViewInit {
   readonly expanded = input(false, { transform: coerceBooleanProperty });
   readonly discoveryDocuments = input<DiscoveryDocumentClass[]>([]);
 
