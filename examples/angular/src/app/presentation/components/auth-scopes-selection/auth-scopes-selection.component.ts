@@ -2,12 +2,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   input,
-  OnInit,
+  output,
+  viewChildren,
   ViewEncapsulation,
 } from '@angular/core';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
-import { MatSelectionList, MatListOption } from '@angular/material/list';
-import { DiscoveryDocumentClass } from '../../../auth';
+import {
+  MatListOption,
+  MatSelectionList,
+  MatSelectionListChange,
+} from '@angular/material/list';
+import { DiscoveryDocumentClass, Scope } from '../../../core/auth';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 @Component({
   standalone: true,
@@ -22,5 +28,33 @@ import { DiscoveryDocumentClass } from '../../../auth';
   },
 })
 export class AuthScopeSelectionComponent {
+  readonly expanded = input(false, { transform: coerceBooleanProperty });
   readonly discoveryDocuments = input<DiscoveryDocumentClass[]>([]);
+
+  readonly selectionChange = output<Scope[]>();
+
+  private readonly selectionLists = viewChildren(MatSelectionList);
+
+  ngAfterViewInit() {
+    // Ensure initial selection emit
+    queueMicrotask(() => this._emitCombinedSelection());
+  }
+
+  _onSelectionChange(_: MatSelectionListChange) {
+    this._emitCombinedSelection();
+  }
+
+  private _emitCombinedSelection() {
+    const selectedScopes: Scope[] = [];
+    const selectionLists = this.selectionLists();
+
+    for (const list of selectionLists) {
+      for (const option of list.selectedOptions.selected) {
+        const scope = option.value as Scope;
+        if (scope) selectedScopes.push(scope);
+      }
+    }
+
+    this.selectionChange.emit(selectedScopes);
+  }
 }

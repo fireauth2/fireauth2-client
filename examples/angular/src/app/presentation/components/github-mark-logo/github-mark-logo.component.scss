@@ -1,0 +1,27 @@
+.fa-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  --fa-logo-size: 24px;
+
+  aspect-ratio: 1 / 1;
+  width: var(--fa-logo-size);
+
+  &__image {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: var(--background-image-url);
+    width: 100%;
+    height: 100%;
+  }
+
+  &.fa-github-logo {
+    --background-image-url: url(/img/github-mark.svg);
+
+    .dark & {
+      --background-image-url: url(/img/github-mark-white.svg);
+    }
+  }
+}

@@ -7,6 +7,13 @@ module.exports = {
     join(__dirname, 'src/**/!(*.stories|*.spec).{ts,html}'),
     ...createGlobPatternsForDependencies(__dirname),
   ],
+  darkMode: [
+    'variant',
+    [
+      '@media (prefers-color-scheme: dark) { &:not(.light *) }',
+      '&:is(.dark *)',
+    ],
+  ],
   theme: {
     extend: {
       colors: {
@@ -17,6 +24,10 @@ module.exports = {
         'secondary-text': 'var(--color-secondary-text)',
         accent: 'var(--color-accent)',
         'border-dark': 'var(--color-border-dark)',
+        link: {
+          DEFAULT: '#2563eb', // blue-600
+          dark: '#3b82f6', // blue-500
+        },
       },
       fontFamily: {
         sans: ['Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif'],

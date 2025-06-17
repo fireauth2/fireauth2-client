@@ -5,13 +5,13 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
+import { Auth } from '@angular/fire/auth';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 import { FireAuth } from '@fireauth2/angular';
 
 export const MAT_COMPONENTS = [
@@ -23,7 +23,7 @@ export const MAT_COMPONENTS = [
 ];
 
 @Component({
-  imports: [RouterOutlet, MAT_COMPONENTS],
+  imports: [MAT_COMPONENTS],
   selector: 'fa-admin-page',
   templateUrl: './admin.page.html',
   styleUrl: './admin.page.scss',
@@ -36,6 +36,7 @@ export const MAT_COMPONENTS = [
 export default class AdminPage {
   private readonly router = inject(Router);
   private readonly fireAuth2 = inject(FireAuth);
+  readonly auth = inject(Auth);
 
   readonly isSidenavEndOpened = signal(false);
 
