@@ -1,6 +1,6 @@
 {
   "name": "@fireauth2/angular",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "license": "AGPL-3.0-only",
   "author": "Nelson Dominguez <ekkolon@proton.me>",
   "repository": {
@@ -12,7 +12,7 @@
     "@angular/core": "^20.0.2",
     "@angular/router": "^20.0.2",
     "@angular/fire": "^20.0.0",
-    "@fireauth2/core": "^0.1.1"
+    "@fireauth2/core": "^0.2.0"
   },
   "sideEffects": false,
   "files": [
