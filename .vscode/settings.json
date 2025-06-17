@@ -1,0 +1,6 @@
+{
+  // Disabled due to conflicts between Tailwind CSS and our custom Angular Material theme.
+  // This rule triggers false positives in our setup.
+  // See: https://github.com/tailwindlabs/tailwindcss-intellisense/issues/734
+  "tailwindCSS.lint.invalidConfigPath": "ignore"
+}

@@ -1,0 +1,11 @@
+@let theme = currentThemeData();
+
+<button mat-icon-button [mat-menu-trigger-for]="themeMenu">
+  <mat-icon>{{ theme?.icon }}</mat-icon>
+</button>
+
+<mat-menu #themeMenu>
+  <button mat-menu-item (click)="_themeService.setLightTheme()">Light</button>
+  <button mat-menu-item (click)="_themeService.setDarkTheme()">Dark</button>
+  <button mat-menu-item (click)="_themeService.setSystemTheme()">System</button>
+</mat-menu>

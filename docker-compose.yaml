@@ -11,14 +11,14 @@ services:
     build:
       context: .
       dockerfile: ./examples/angular/Dockerfile
-    
+
     ports:
-      - "4000:4000"
+      - '4000:4000'
 
     environment:
       NODE_ENV: production
       PORT: 4000
-    
+
     # Restart the container if it exits unexpectedly.
     # 'unless-stopped' means it will restart unless explicitly stopped by the user.
     restart: unless-stopped
@@ -31,7 +31,7 @@ services:
       dockerfile: ./fireauth2-server/Dockerfile
     ports:
       - 8080:8080
-    # Create a .env file in the root of this project or replace the variables 
+    # Create a .env file in the root of this project or replace the variables
     # found in the .env.example file and rename it.
     env_file: .env
     environment:

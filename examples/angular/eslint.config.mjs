@@ -26,10 +26,7 @@ export default [
       ],
       '@angular-eslint/component-class-suffix': [
         'error',
-        {
-          type: 'element',
-          suffixes: ['Component', 'Page'],
-        },
+        { suffixes: ['Component', 'Page'] },
       ],
     },
   },

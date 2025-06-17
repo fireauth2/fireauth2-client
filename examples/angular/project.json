@@ -22,11 +22,14 @@
             "input": "examples/angular/public"
           }
         ],
-        "styles": [
-          "@angular/material/prebuilt-themes/azure-blue.css",
-          "examples/angular/src/styles.scss"
+        "styles": ["examples/angular/src/styles.scss"],
+        "scripts": [
+          {
+            "bundleName": "theme",
+            "input": "examples/angular/src/scripts/theme.js",
+            "inject": true
+          }
         ],
-        "scripts": [],
         "server": "examples/angular/src/main.server.ts",
         "ssr": {
           "entry": "examples/angular/src/server.ts"

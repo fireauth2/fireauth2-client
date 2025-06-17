@@ -1,31 +1,62 @@
 .fa-login-page {
+  position: relative;
+
+  &__placeholder {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-color: var(--color-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fa-nav-list {
+    &--horizontal {
+      display: flex;
+      flex-direction: row;
+      padding-inline: 16px;
+    }
+
+    &__item {
+      width: fit-content;
+    }
+  }
+
+  .fa-login-card {
+    // --mat-card-outlined-container-color: var(--mat-sys-on-primary);
+    // --mat-card-outlined-outline-color: var(--mat-sys-surface-dim);
+    --mat-card-outlined-container-shape: var(--mat-sys-corner-large);
+
+    .mat-mdc-card-header-text {
+      flex: 1;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .fa-login-card {
+      --mat-card-outlined-outline-color: transparent;
+    }
+  }
+
   .fa-login__form {
-    max-width: 425px;
+    max-width: 480px;
     margin: 0 auto;
     width: 100%;
     flex-grow: 0;
     padding: 24px;
   }
 
-  #loading {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: #fff;
-    animation: spin 1s ease-in-out infinite;
-    -webkit-animation: spin 1s ease-in-out infinite;
-  }
+  .fa-continue-button {
+    @apply flex items-center justify-center w-full gap-4 shadow-bordered h-12 rounded-full px-4 pl-3 transition;
 
-  @keyframes spin {
-    to {
-      -webkit-transform: rotate(360deg);
-    }
-  }
-  @-webkit-keyframes spin {
-    to {
-      -webkit-transform: rotate(360deg);
+    @apply bg-neutral-900 text-white hover:bg-neutral-800; // Light mode: darkish bg
+
+    .dark & {
+      @apply bg-white text-black hover:bg-gray-100; // Dark mode: lightish bg
     }
   }
 }

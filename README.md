@@ -6,16 +6,17 @@ JavaScript SDK for [FireAuth2 Servers](https://github.com/ekkolon/fireauth2)
 
 - [`@fireauth2/core`](./packages/core/)
 
-    Framework-agnostic core logic
+  Framework-agnostic core logic
+
 - [`@fireauth2/angular`](./packages/angular/)
 
-    Angular integration
+  Angular integration
 
 ## Examples
 
 - [`Angular`](./examples/angular/)
 
-    Angular v20 example application
+  Angular v20 example application
 
 ## 📄 License
 

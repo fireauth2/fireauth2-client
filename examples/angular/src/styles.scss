@@ -1,71 +1,34 @@
+@use './app/theme/fa_theme.scss' as fa;
+
+// Setup FireAuth Material Theme
+@include fa.theme;
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --fa-shadow-bordered:
-    rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-}
-
 @layer components {
-  .shadow-bordered {
-    box-shadow: var(--fa-shadow-bordered);
+  .card {
+    @apply bg-surface text-primary-text border border-border-dark;
   }
-}
 
-html,
-body {
-  height: 100%;
-}
+  .button-primary {
+    @apply bg-accent text-black hover:brightness-110;
+  }
 
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-}
+  .text-secondary {
+    @apply text-secondaryText;
+  }
 
-.fa-page {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
+  .fa-vertical-divider {
+    width: 1px;
+    height: 1.5rem;
+    background-color: theme('colors.gray.300');
+    margin-left: theme('spacing.2');
+    margin-right: theme('spacing.2');
+  }
 
-.sticky-top {
-  position: sticky;
-  top: 0;
-  z-index: 1001;
-}
-
-//*******************************
-//** Material / tailwind fixes **
-//*******************************
-.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field
-  .mdc-notched-outline__notch {
-  border-right-style: hidden;
-}
-
-.mat-mdc-input-element {
-  box-shadow: none !important;
-}
-
-.sticky {
-  position: sticky !important;
-}
-
-[type='text'],
-[type='email'],
-[type='url'],
-[type='password'],
-[type='number'],
-[type='date'],
-[type='datetime-local'],
-[type='month'],
-[type='search'],
-[type='tel'],
-[type='time'],
-[type='week'],
-[multiple],
-textarea,
-select {
-  padding: 0;
-  border: none;
+  .dark .fa-vertical-divider {
+    background-color: theme('colors.gray.600');
+  }
 }

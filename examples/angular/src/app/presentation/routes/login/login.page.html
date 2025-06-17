@@ -1,52 +1,105 @@
-@if (isServer) {
-  <div
-    style="
-      height: 100vh;
-      width: 100vw;
-      background-color: rgb(194, 24, 91);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    "
-  >
-    <div id="loading"></div>
-  </div>
-} @else if (!isUser()) {
-  <mat-toolbar class="!bg-inherit border-b">
-    <div class="flex items-center gap-4">
+@defer (when !isServer && !isUser()) {
+  <mat-toolbar class="!bg-inherit">
+    <a class="flex items-center gap-4" routerLink="/">
       <img class="size-8" src="/img/fireauth-logo.svg" alt="FireAuth2 Logo" />
-      <span class="font-brand font-extrabold">FireAuth2</span>
+      <span class="font-brand font-extrabold">{{ appConstants.appName }}</span>
+    </a>
+    <div class="flex items-center flex-1 justify-center"></div>
+    <div class="flex items-center gap-2">
+      <a
+        [title]="appConstants.appName + '\'s GitHub Repository'"
+        [href]="appConstants.gitHubOrganizationUrl"
+        target="_blank"
+      >
+        <fa-github-logo></fa-github-logo>
+      </a>
+      <div class="fa-vertical-divider"></div>
+      <fa-theme-switcher matTooltip="Switch Theme"></fa-theme-switcher>
     </div>
-    <div class="flex items-center"></div>
-    <div></div>
   </mat-toolbar>
   <main class="flex flex-col flex-1">
     <div class="flex flex-col flex-1 items-center justify-center">
-      <form class="fa-login__form rounded-2xl shadow-bordered">
-        <header>
-          <div class="flex items-center gap-4">
-            <h1 class="text-2xl font-sans font-semibold">Sign in</h1>
-          </div>
-          <div class="mt-4 text-gray-700">
-            <p>
-              Say goodbye to credential headaches. FireAuth2 makes integrating
-              Google OAuth 2.0 with your Firebase Authentication effortless and
-              secure.
-            </p>
-          </div>
-        </header>
+      <header class="fa-login__form text-center">
+        <h1 class="text-3xl font-brand font-black">Sign in</h1>
+        <p class="text-lg sm:text-xl mt-3">
+          Persistent Google OAuth 2.0 with Firebase.
+        </p>
+      </header>
 
-        <section class="mt-6">
-          <button
-            type="button"
-            class="flex items-center justify-center w-full gap-4 shadow-bordered h-12 rounded-full px-4 pl-3 hover:bg-gray-100 transition"
-            (click)="login()"
-          >
-            <img class="size-6" src="/img/google-logo.webp" alt="Google Logo" />
-            Continue with Google
-          </button>
-        </section>
-      </form>
+      <section class="">
+        <mat-card class="fa-login-card mt-4" appearance="outlined">
+          <mat-card-header class="sm:!px-6 !pt-5 h-16 items-center">
+            <mat-card-title> Select OAuth 2.0 Scopes </mat-card-title>
+            <button
+              mat-icon-button
+              matTooltip="If this is not your first time signing in to your account, you may have already authorized this demo application to use certain scopes."
+            >
+              <mat-icon>info</mat-icon>
+            </button>
+          </mat-card-header>
+          <mat-card-content class="sm:!px-6 !pt-2 sm:!pt-3">
+            <section class="flex flex-col gap-4">
+              <fa-auth-scopes-selection
+                [expanded]="true"
+                [discoveryDocuments]="discoveryDocuments"
+                (selectionChange)="scopes.set($event)"
+              ></fa-auth-scopes-selection>
+            </section>
+
+            <section class="mt-8">
+              <button
+                type="button"
+                class="fa-continue-button max-w-80 sm:max-w-96 mx-auto flex items-center"
+                (click)="login()"
+              >
+                <img
+                  class="size-6"
+                  src="/img/google-logo.webp"
+                  alt="Google Logo"
+                />
+                Continue with Google
+              </button>
+              <div class="text-center mt-2">
+                <p class="text-xs text-gray-400">
+                  Google and Google logos are trademarks of Google LLC.
+                </p>
+              </div>
+            </section>
+          </mat-card-content>
+        </mat-card>
+      </section>
+
+      <!-- <form class="fa-login__form rounded-2xl shadow-bordered">
+    
+      </form> -->
     </div>
   </main>
+  <mat-toolbar
+    class="!text-gray-500 !bg-inherit !h-auto !flex-wrap gap-4 !py-4 !text-center !flex-col-reverse sm:py-0 sm:!flex-row"
+  >
+    <div class="flex items-center gap-4">
+      <span class="text-sm"
+        >© 2025 The {{ appConstants.appName }} Authors.</span
+      >
+    </div>
+    <div class="flex items-center flex-1 justify-end">
+      <p class="text-sm">
+        Source available under the
+        <a
+          class="text-link"
+          [href]="appConstants.projectLicenseUrl"
+          target="_blank"
+          >{{ appConstants.projectLicense }}</a
+        >.
+      </p>
+    </div>
+  </mat-toolbar>
+} @placeholder (minimum 1.618s) {
+  <div class="fa-login-page__placeholder">
+    <mat-spinner [diameter]="32"></mat-spinner>
+  </div>
+} @loading (minimum 1s) {
+  <div class="fa-login-page__placeholder">
+    <mat-spinner [diameter]="32"></mat-spinner>
+  </div>
 }

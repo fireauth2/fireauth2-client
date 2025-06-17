@@ -12,9 +12,9 @@ declare interface FireAuthEnv {
   serverUrl: string;
 }
 
-declare var process: {
+declare let process: {
   env: {
-    PORT: string,
+    PORT: string;
     firebase: FirebaseEnv;
     fireauth: FireAuthEnv;
   };

@@ -1,6 +1,7 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import appConstants from './core/constants/app.constants';
 
 @Component({
   imports: [RouterModule],
@@ -13,9 +14,10 @@ import { RouterModule } from '@angular/router';
   },
 })
 export class AppComponent {
-  title = 'FireAuth';
+  readonly title = appConstants.appName;
 
-  constructor(matIconRegistry: MatIconRegistry) {
+  constructor() {
+    const matIconRegistry = inject(MatIconRegistry);
     matIconRegistry.setDefaultFontSetClass('material-symbols-rounded');
   }
 }
