@@ -3,7 +3,6 @@ secrets:
   # Google Cloud Platform service account credentials
   google-application-credentials:
     file: ${GOOGLE_APPLICATION_CREDENTIALS}
-
 services:
   # Angular example application
   fireauth2-angular:
@@ -11,18 +10,17 @@ services:
     build:
       context: .
       dockerfile: ./examples/angular/Dockerfile
-
     ports:
       - '4000:4000'
-
+    # Either use a dedicated .env file (e.g .env.angular) or place all required
+    # Firebase config fields in the .env file the FireAuth server instance uses.
+    env_file: .env
     environment:
       NODE_ENV: production
       PORT: 4000
-
     # Restart the container if it exits unexpectedly.
     # 'unless-stopped' means it will restart unless explicitly stopped by the user.
     restart: unless-stopped
-
   # FireAuth Server
   fireauth2:
     image: fireauth2/fireauth2:latest
