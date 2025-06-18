@@ -11,10 +11,11 @@ services:
     build:
       context: .
       dockerfile: ./examples/angular/Dockerfile
-
     ports:
       - '4000:4000'
-
+    # Either use a dedicated .env file (e.g .env.angular) or place all required
+    # Firebase config fields in the .env file the FireAuth server instance uses. 
+    env_file: .env
     environment:
       NODE_ENV: production
       PORT: 4000
